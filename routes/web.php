@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [DashboardController::class, '__invoke']);
+Route::get('/dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
+Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
 
 require __DIR__.'/auth.php';
