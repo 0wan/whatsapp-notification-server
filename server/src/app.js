@@ -1,4 +1,5 @@
-const pino = require("pino")()
+require('dotenv').config();
+const pino = require("./logger")
 const express = require('express')
 const exceptionHandler = require('express-exception-handler')
 const http = require('http')
@@ -7,7 +8,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const config = require('./config')
 const routes = require('./routes');
-const {startSock} = require("./whatsapp");
+const {startSock, saveStore} = require("./whatsapp");
 
 exceptionHandler.handle()
 
@@ -27,7 +28,7 @@ const server = app.listen(config.port, config.host, () => {
 })
 
 const exitClients = () => {
-
+    saveStore()
 }
 
 const UnexpectedExceptionHandler = (error) => {

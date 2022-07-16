@@ -1,4 +1,5 @@
 const express = require('express')
+const pino = require("pino")()
 const response = require("./response");
 const {ok, fail} = require("./response");
 const {AuthToken} = require("./middlewares");
@@ -7,6 +8,24 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
     ok(res, 'Server Up and Running')
+})
+
+router.get('/status', (req, res) => {    
+    const states = ['connecting', 'connected', 'disconnecting', 'disconnected']
+    let state = states[Whatsapp.ws.readyState]
+
+    state =
+        state === 'connected' && typeof Whatsapp.user !== 'undefined'
+            ? 'authenticated'
+            : state
+
+    let data = { status: state }
+
+    if(global.QRCode) {
+        data.qr = global.QRCode
+    }
+
+    ok(res, 'Server Up and Running', data/*Whatsapp { status: state }*/)
 })
 
 /**
