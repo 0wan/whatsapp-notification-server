@@ -18,7 +18,7 @@
         <div class="">
             <x-label value="Scan QRCode below :" />
             <div class="">
-                {!! QrCode::size(250)->generate($qr) !!}
+                {!! QrCode::size(300)->generate($qr) !!}
             </div>
         </div>
         @endif

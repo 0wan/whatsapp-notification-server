@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,6 @@ Route::get('/', [DashboardController::class, '__invoke']);
 Route::get('/dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
 Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+Route::get('/token', [TokenController::class, 'index'])->name('token.index');
 
 require __DIR__.'/auth.php';

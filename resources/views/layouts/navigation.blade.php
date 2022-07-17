@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
                         {{ __('Message') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('token.index')" :active="request()->routeIs('token.index')">
+                        {{ __('REST API') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('setting.index')" :active="request()->routeIs('setting.index')">
                         {{ __('Setting') }}
                     </x-nav-link>
@@ -74,6 +77,9 @@
             </x-nav-link-responsive>
             <x-nav-link-responsive :href="route('message.index')" :active="request()->routeIs('message.index')">
                 {{ __('Message') }}
+            </x-nav-link-responsive>
+            <x-nav-link-responsive :href="route('token.index')" :active="request()->routeIs('token.index')">
+                {{ __('REST API') }}
             </x-nav-link-responsive>
             <x-nav-link-responsive :href="route('setting.index')" :active="request()->routeIs('setting.index')">
                 {{ __('Setting') }}
