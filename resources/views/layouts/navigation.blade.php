@@ -5,8 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                        <h2 class="block text-2xl font-medium w-auto text-gray-600">{{ config('app.name', 'Laravel') }}</h2>
                     </a>
                 </div>
 
@@ -14,6 +14,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('message.index')" :active="request()->routeIs('message.index')">
+                        {{ __('Message') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('token.index')" :active="request()->routeIs('token.index')">
+                        {{ __('REST API') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('setting.index')" :active="request()->routeIs('setting.index')">
+                        {{ __('Setting') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -63,9 +72,18 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link-responsive :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            </x-nav-link-responsive>
+            <x-nav-link-responsive :href="route('message.index')" :active="request()->routeIs('message.index')">
+                {{ __('Message') }}
+            </x-nav-link-responsive>
+            <x-nav-link-responsive :href="route('token.index')" :active="request()->routeIs('token.index')">
+                {{ __('REST API') }}
+            </x-nav-link-responsive>
+            <x-nav-link-responsive :href="route('setting.index')" :active="request()->routeIs('setting.index')">
+                {{ __('Setting') }}
+            </x-nav-link-responsive>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -80,11 +98,11 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-nav-link-responsive :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    </x-nav-link-responsive>
                 </form>
             </div>
         </div>

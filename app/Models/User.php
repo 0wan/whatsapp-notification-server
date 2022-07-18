@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\NewAccessToken;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -42,4 +44,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Create a new personal access token for the user.
+     *
+     * @param  string  $name
+     * @param  array  $abilities
+     * @return \Laravel\Sanctum\NewAccessToken
+     */
+    public function createToken(string $name, array $abilities = ['*'])
+    {
+        $token = $this->tokens()->create([
+            'name' => $name,
+            'token' => hash('sha256', $plainTextToken = Str::random(40)),
+            'abilities' => $abilities,
+        ]);
+
+        return new NewAccessToken($token, $token->getKey().'|'.$plainTextToken);
+    }
 }
