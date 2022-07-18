@@ -16,4 +16,9 @@ class Server extends Model
 
         return ($path) ? $s.$path : $s;
     }
+
+    public function routeNotificationForWebhook()
+    {
+        return $this->getUrl('message');
+    }
 }
